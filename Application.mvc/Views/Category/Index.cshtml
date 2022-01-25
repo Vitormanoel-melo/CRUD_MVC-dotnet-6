@@ -1,0 +1,60 @@
+﻿
+@*Recebe a lista de categorias e armazena dentro de um enumerable*@
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container p-3 mb-4">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-secondary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Category
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered table-striped" style="width: 100%">
+
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th>Created Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @*Faz um foreach na lista de categorias*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="45%">@item.Name</td>
+                <td width="20%">@item.DisplayOrder</td>
+                <td width="20%">@item.CreatedDate</td>
+                <td>
+                    <div class="w-100 btn-group" role="group">
+                        <a asp-controller="Category" style="text-decoration: none" 
+                        asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+
+                        <a asp-controller="Category" style="text-decoration: none;" 
+                        asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </div>    
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
